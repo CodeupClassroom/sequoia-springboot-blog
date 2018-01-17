@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello</title>
+</head>
+<body>
+
+<h1>Hello
+    <span th:text="${name}"></span>
+    <span th:if="!${name}">World</span>!
+</h1>
+<ul>
+    <li></li>
+</ul>
+<br/>
+<div th:replace="fragments/footer :: my-partial"></div>
+</body>
+</html>
