@@ -1,6 +1,7 @@
 package com.codeup.sequoiaspringbootblog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,15 +24,14 @@ public class HelloWorldController {
     }
 
     @GetMapping("/hello")
-    @ResponseBody
     public String helloWorld() {
-        return "Hello, World!";
+        return "hello";
     }
 
     @GetMapping("/hello/{name}")
-    @ResponseBody
-    public String sayHelloTo(@PathVariable String name) {
-        return "Hello, " + name + "!";
+    public String sayHelloTo(@PathVariable String name, Model viewModel) {
+        viewModel.addAttribute("name", name);
+        return "hello";
     }
 
 }
