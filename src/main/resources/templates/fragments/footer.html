@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head></head>
 <body>
 
-<!-- Defines the fragment-->
-<footer th:fragment="my-partial" id="asd" class="red-color">
-    partial content goes here...
-</footer>
-
-<footer th:fragment="my-partial2" id="asd" class="red-color">
-    partial content goes here...
+<footer th:fragment="footer" class="footer">
+    <footer class="footer">
+        <div class="container">
+            <!-- Using #dates : utility methods for java.util.Date objects: -->
+            <span class="text-muted">Codeup blog &copy; <span th:text="${#dates.year(#dates.createNow())}"></span></span>
+        </div>
+    </footer>
 </footer>
 
 </body>

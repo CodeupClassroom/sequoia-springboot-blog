@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header :: main-header('Roll Dice')"></head>
+<body>
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-12">
+            <div th:if="${guess != null}">
+                <h1 th:text="${'Guess: ' + guess}"></h1>
+                <h1 th:text="${'Random: ' + rnd}"></h1>
+
+                <h1 th:if="${win}">You Won!</h1>
+                <h1 th:if="${!win}">You Lost!</h1>
+            </div>
+
+            <!-- Using #numbers : utility methods for number objects:-->
+            <div th:each="number : ${#numbers.sequence(1,6)}">
+                <a class="btn btn-primary" th:href="@{'/roll-dice/' + ${number}}" th:text="${number}"></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>
