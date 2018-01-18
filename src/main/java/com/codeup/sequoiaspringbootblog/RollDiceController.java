@@ -21,7 +21,7 @@ public class RollDiceController {
         // Determines if you win or not
         boolean win = (rnd == guess) ? true : false;
 
-        vModel.addAttribute("guess", guess);
+        vModel.addAttribute("guess", guess);  // request.setAttribute("guess", guess);
         vModel.addAttribute("rnd", rnd);
         vModel.addAttribute("win", win);
 
