@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head></head>
 <body>
 
-<!-- Defines the fragment-->
-<footer th:fragment="my-partial" id="asd" class="red-color">
-    partial content goes here...
-</footer>
+<footer th:fragment="footer" class="footer">
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
 
-<footer th:fragment="my-partial2" id="asd" class="red-color">
-    partial content goes here...
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"
+    >
+    </script>
 </footer>
 
 </body>
