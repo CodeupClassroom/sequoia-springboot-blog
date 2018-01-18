@@ -6,16 +6,10 @@
 <footer th:fragment="footer" class="footer">
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+            <!-- Using #dates : utility methods for java.util.Date objects: -->
+            <span class="text-muted">Codeup blog &copy; <span th:text="${#dates.year(#dates.createNow())}"></span></span>
         </div>
     </footer>
-
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"
-    >
-    </script>
 </footer>
 
 </body>

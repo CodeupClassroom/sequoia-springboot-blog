@@ -14,15 +14,15 @@
                 <h1 th:if="${!win}">You Lost!</h1>
             </div>
 
-            <a class="btn btn-primary" href="/roll-dice/1">1</a>
-            <a class="btn btn-primary" href="/roll-dice/2">2</a>
-            <a class="btn btn-primary" href="/roll-dice/3">3</a>
-            <a class="btn btn-primary" href="/roll-dice/4">4</a>
-            <a class="btn btn-primary" href="/roll-dice/5">5</a>
-            <a class="btn btn-primary" href="/roll-dice/6">6</a>
+            <!-- Using #numbers : utility methods for number objects:-->
+            <div th:each="number : ${#numbers.sequence(1,6)}">
+                <a class="btn btn-primary" th:href="@{'/roll-dice/' + ${number}}" th:text="${number}"></a>
+            </div>
+
         </div>
     </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
