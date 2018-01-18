@@ -3,6 +3,7 @@ package com.codeup.sequoiaspringbootblog.services;
 import com.codeup.sequoiaspringbootblog.models.Ad;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -10,6 +11,7 @@ public class AdService {
     private List<Ad> ads;
 
     public AdService() {
+        ads = new ArrayList<>();
         createAds();
     }
 
