@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: main-header('New ad')">
+</head>
+<body>
+<form action="/ads/create" method="post">
+    Title:
+    <input name="title" />
+    <br />
+    Description:
+    <input name="description" />
+    <br />
+    <input type="submit" />
+</form>
+</body>
+</html>

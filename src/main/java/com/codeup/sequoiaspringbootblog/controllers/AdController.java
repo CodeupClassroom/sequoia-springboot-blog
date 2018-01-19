@@ -4,9 +4,7 @@ import com.codeup.sequoiaspringbootblog.models.Ad;
 import com.codeup.sequoiaspringbootblog.services.AdService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,17 @@ public class AdController {
         viewAndModel.addAttribute("ad", ad);
 
         return "ads/show";
+    }
+
+    @GetMapping("/ads/new")
+    public String showCreateAdForm() {
+        return "ads/new";
+    }
+
+    @PostMapping("/ads/create")
+    @ResponseBody
+    public String saveAd(@RequestParam("title") String title, @RequestParam("description") String description) {
+        Ad ad = new Ad(title, description);
+        return ad.getTitle() + " " + ad.getDescription()    ;
     }
 }
