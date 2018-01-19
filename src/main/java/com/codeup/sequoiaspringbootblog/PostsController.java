@@ -2,16 +2,10 @@ package com.codeup.sequoiaspringbootblog;
 
 import com.codeup.sequoiaspringbootblog.models.Post;
 import com.codeup.sequoiaspringbootblog.services.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 // Page to search posts
@@ -35,11 +29,11 @@ import java.util.List;
 @Controller
 public class PostsController {
     // 1. Create an instance variable with your dependency
-    private final PostService service;
+    private final PostService postService;
 
     // 2. Inject the dependency through the constructor and assign it to your instance variable
-    public PostsController(PostService service) {
-        this.service = service; // This the first time we assign something to service
+    public PostsController(PostService postService) {
+        this.postService = postService; // This the first time we assign something to postService
     }
 
     @RequestMapping("/posts")
@@ -49,7 +43,7 @@ public class PostsController {
             new Post("Post B", "Body B"),
             new Post("Post C", "Body C")
         );*/
-        List<Post> posts = service.findAll();
+        List<Post> posts = postService.findAll();
 
         viewAndModel.addAttribute("posts", posts);
 
@@ -59,7 +53,7 @@ public class PostsController {
     @RequestMapping("/posts/{id}")
     public String show(@PathVariable long id, Model viewAndModel) {
         //Post post = new Post("Test post", "Test body");
-        Post post = service.findOne(id);
+        Post post = postService.findOne(id);
 
         viewAndModel.addAttribute("post", post);
 
@@ -73,8 +67,15 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "Store a post in the database";
+    public String createPost(@ModelAttribute Post post) {
+        postService.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String showEditForm(@PathVariable long id, Model viewAndModel) {
+        Post post = postService.findOne(id);
+        viewAndModel.addAttribute("post", post);
+        return "posts/edit";
     }
 }
