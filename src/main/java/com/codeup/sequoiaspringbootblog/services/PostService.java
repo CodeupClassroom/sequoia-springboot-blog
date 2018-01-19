@@ -23,6 +23,7 @@ public class PostService {
 
     public void save(Post post) {
         post.setId(posts.size() + 1);
+        this.posts.add(post);
     }
 
     public List<Post> findAll() {
