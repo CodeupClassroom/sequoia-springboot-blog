@@ -5,6 +5,7 @@ import com.codeup.sequoiaspringbootblog.services.AdService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -28,7 +29,11 @@ public class AdController {
     }
 
     @GetMapping("/ads/{id}")
-    public String showIndividualAd(@PathVariable long id) {
-        return "";
+    public String showIndividualAd(@PathVariable long id, Model viewAndModel) {
+        Ad ad = service.findOne(id);
+
+        viewAndModel.addAttribute("ad", ad);
+
+        return "ads/show";
     }
 }
