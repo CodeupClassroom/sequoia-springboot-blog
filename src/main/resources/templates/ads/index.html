@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: main-header('All ads')">
+</head>
+<body>
+<div th:each="ad : ${ads}">
+    <h1 th:text="${ad.title}"></h1>
+    <p th:text="${ad.description}"></p>
+</div>
+</body>
+</html>
