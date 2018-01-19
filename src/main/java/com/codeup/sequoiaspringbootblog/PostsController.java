@@ -30,11 +30,12 @@ public class PostsController {
 
     @RequestMapping("/posts")
     public String index(Model viewAndModel) {
-        List<Post> posts = Arrays.asList(
+        /*List<Post> posts = Arrays.asList(
             new Post("Post A", "Body A"),
             new Post("Post B", "Body B"),
             new Post("Post C", "Body C")
-        );
+        );*/
+        List<Post> posts = service.findAll();
 
         viewAndModel.addAttribute("posts", posts);
 
@@ -43,7 +44,8 @@ public class PostsController {
 
     @RequestMapping("/posts/{id}")
     public String show(@PathVariable long id, Model viewAndModel) {
-        Post post = new Post("Test post", "Test body");
+        //Post post = new Post("Test post", "Test body");
+        Post post = service.findOne(id);
 
         viewAndModel.addAttribute("post", post);
 
