@@ -36,14 +36,15 @@ public class AdController {
     }
 
     @GetMapping("/ads/new")
-    public String showCreateAdForm() {
+    public String showCreateAdForm(Model vModel) {
+        Ad ad = new Ad();
+        vModel.addAttribute("ad", ad);
         return "ads/new";
     }
 
     @PostMapping("/ads/create")
     @ResponseBody
-    public String saveAd(@RequestParam("title") String title, @RequestParam("description") String description) {
-        Ad ad = new Ad(title, description);
+    public String saveAd(@ModelAttribute Ad ad) {
         adsService.save(ad);
         return ad.getTitle() + " " + ad.getDescription();
     }
