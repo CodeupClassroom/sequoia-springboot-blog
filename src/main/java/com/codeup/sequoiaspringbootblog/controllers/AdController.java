@@ -11,15 +11,15 @@ import java.util.List;
 @Controller
 public class AdController {
     // Auto-wiring
-    private AdService service;
+    private AdService adsService;
 
     public AdController(AdService service) {
-        this.service = service;
+        this.adsService = service;
     }
 
     @GetMapping("/ads")
     public String showAllAds(Model viewAndModel) {
-        List<Ad> ads = service.findAll();
+        List<Ad> ads = adsService.findAll();
 
         viewAndModel.addAttribute("ads", ads);
 
@@ -28,7 +28,7 @@ public class AdController {
 
     @GetMapping("/ads/{id}")
     public String showIndividualAd(@PathVariable long id, Model viewAndModel) {
-        Ad ad = service.findOne(id);
+        Ad ad = adsService.findOne(id);
 
         viewAndModel.addAttribute("ad", ad);
 
@@ -44,6 +44,7 @@ public class AdController {
     @ResponseBody
     public String saveAd(@RequestParam("title") String title, @RequestParam("description") String description) {
         Ad ad = new Ad(title, description);
-        return ad.getTitle() + " " + ad.getDescription()    ;
+        adsService.save(ad);
+        return ad.getTitle() + " " + ad.getDescription();
     }
 }
