@@ -33,4 +33,8 @@ public class PostService {
     public Post findOne(long id) {
         return posts.get((int)id - 1);
     }
+
+    public void update(Post post) {
+        posts.set((int)post.getId() - 1, post);
+    }
 }

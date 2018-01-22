@@ -78,4 +78,10 @@ public class PostsController {
         viewAndModel.addAttribute("post", post);
         return "posts/edit";
     }
+
+    @PostMapping("/posts/edit")
+    public String updatePost(@ModelAttribute Post post) {
+        postService.update(post);
+        return "redirect:/posts";
+    }
 }

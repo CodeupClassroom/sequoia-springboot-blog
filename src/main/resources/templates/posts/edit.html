@@ -5,6 +5,7 @@
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 <form action="/posts/edit" method="post" th:object="${post}" >
+    <input type="hidden" th:field="*{id}" />
     Title:
     <input th:field="*{title}" />
     <br />
