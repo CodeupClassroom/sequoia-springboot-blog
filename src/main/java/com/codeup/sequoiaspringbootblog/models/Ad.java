@@ -1,13 +1,17 @@
 package com.codeup.sequoiaspringbootblog.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "ads")
 public class Ad {
-    @Id
+    @Id @GeneratedValue
     private long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = true)
     private String description;
 
     public Ad(String title, String description) {
