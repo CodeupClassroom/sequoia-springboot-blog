@@ -23,6 +23,7 @@ public class PostService {
 
     public void save(Post post) {
         post.setId(posts.size() + 1);
+        this.posts.add(post);
     }
 
     public List<Post> findAll() {
@@ -31,5 +32,9 @@ public class PostService {
 
     public Post findOne(long id) {
         return posts.get((int)id - 1);
+    }
+
+    public void update(Post post) {
+        posts.set((int)post.getId() - 1, post);
     }
 }
