@@ -43,7 +43,7 @@ public class PostsController {
             new Post("Post B", "Body B"),
             new Post("Post C", "Body C")
         );*/
-        List<Post> posts = postService.findAll();
+        Iterable<Post> posts = postService.findAll();
 
         viewAndModel.addAttribute("posts", posts);
 
@@ -81,7 +81,7 @@ public class PostsController {
 
     @PostMapping("/posts/edit")
     public String updatePost(@ModelAttribute Post post) {
-        postService.update(post);
+        postService.save(post);
         return "redirect:/posts";
     }
 }
