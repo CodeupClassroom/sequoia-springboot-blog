@@ -1,6 +1,11 @@
 package com.codeup.sequoiaspringbootblog.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Ad {
+    @Id
     private long id;
     private String title;
     private String description;
