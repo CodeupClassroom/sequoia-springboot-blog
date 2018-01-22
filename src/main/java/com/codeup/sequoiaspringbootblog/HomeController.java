@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
 @Controller
 public class HomeController {
     private AdRepository adDao;
@@ -23,7 +21,7 @@ public class HomeController {
 
     @GetMapping("/dao-test")
     @ResponseBody
-    public String daoTest() {
+    public Iterable<Ad> daoTest() {
 //        Iterable<Ad> ads = adDao.findAll();
 //
 //        for (Ad ad : ads) {
@@ -33,18 +31,11 @@ public class HomeController {
 //            System.out.println("  description: " + ad.getDescription());
 //        }
 
-        // we are hardcoding values for demonstration, in practice, these would come from a form
-        Ad ad = new Ad("title c", "description c");
+//        // we are hardcoding values for demonstration, in practice, these would come from a form
+//        Ad ad = new Ad("title c", "description c");
+//        adDao.save(ad);
 
-
-        adDao.save(ad);
-
-        adDao.
-
-
-
-
-        return "Check your console, yo";
+        return adDao.findAll();
     }
 
 
