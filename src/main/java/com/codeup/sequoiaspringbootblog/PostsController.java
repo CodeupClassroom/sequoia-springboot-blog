@@ -79,8 +79,9 @@ public class PostsController {
         return "posts/edit";
     }
 
-    @PostMapping("/posts/edit")
-    public String updatePost(@ModelAttribute Post post) {
+    @PostMapping("/posts/{id}/edit")
+    public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
+        post.setId(id);
         postService.save(post);
         return "redirect:/posts";
     }
