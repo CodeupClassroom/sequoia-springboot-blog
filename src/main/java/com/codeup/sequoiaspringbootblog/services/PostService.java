@@ -31,4 +31,7 @@ public class PostService {
         return postDao.findOne(id);
     }
 
+    public void delete(long id) {
+        postDao.delete(id);
+    }
 }
