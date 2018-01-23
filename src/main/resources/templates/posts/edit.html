@@ -17,8 +17,8 @@
 <!-- Delete Button -->
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <form th:action="@{/posts/{id}/delete(id=${post.id})}">
-            <input type="text" class="btn btn-block btn-danger" value="Delete This Post" />
+        <form method="post" th:action="@{/posts/{id}/delete(id=${post.id})}">
+            <input type="submit" class="btn btn-block btn-danger" value="Delete This Post" />
         </form>
     </div>
 </div>
