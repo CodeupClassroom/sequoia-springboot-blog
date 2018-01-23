@@ -4,8 +4,7 @@
 </head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
-<form action="/posts/edit" method="post" th:object="${post}" >
-    <input type="hidden" th:field="*{id}" />
+<form th:action="@{/posts/{id}/edit(id=${post.id})}" method="post" th:object="${post}" >
     Title:
     <input th:field="*{title}" />
     <br />
@@ -14,6 +13,16 @@
     <br />
     <input type="submit" value="Edit"/>
 </form>
+
+<!-- Delete Button -->
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form method="post" th:action="@{/posts/{id}/delete(id=${post.id})}">
+            <input type="submit" class="btn btn-block btn-danger" value="Delete This Post" />
+        </form>
+    </div>
+</div>
+
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

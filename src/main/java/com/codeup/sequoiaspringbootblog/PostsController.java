@@ -43,7 +43,7 @@ public class PostsController {
             new Post("Post B", "Body B"),
             new Post("Post C", "Body C")
         );*/
-        List<Post> posts = postService.findAll();
+        Iterable<Post> posts = postService.findAll();
 
         viewAndModel.addAttribute("posts", posts);
 
@@ -79,9 +79,16 @@ public class PostsController {
         return "posts/edit";
     }
 
-    @PostMapping("/posts/edit")
-    public String updatePost(@ModelAttribute Post post) {
-        postService.update(post);
+    @PostMapping("/posts/{id}/edit")
+    public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
+        post.setId(id);
+        postService.save(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public String delete(@PathVariable long id) {
+        postService.delete(id);
         return "redirect:/posts";
     }
 }

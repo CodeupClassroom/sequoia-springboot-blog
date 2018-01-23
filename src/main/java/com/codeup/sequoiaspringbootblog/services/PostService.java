@@ -1,40 +1,37 @@
 package com.codeup.sequoiaspringbootblog.services;
 
+import com.codeup.sequoiaspringbootblog.daos.PostDao;
 import com.codeup.sequoiaspringbootblog.models.Post;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service  // Spring Bean
 public class PostService {
-    private List<Post> posts;
+    private PostDao postDao;
 
-    public PostService() {
-        this.posts = new ArrayList<>();
-        createPosts();
+    public PostService(PostDao postDao) {
+        this.postDao = postDao;
     }
 
-    private void createPosts() {
-        save(new Post("Title A", "Body A"));
-        save(new Post("Title B", "Body B"));
-        save(new Post("Title C", "Body C"));
-    }
-
+    // note that we don't need separate insert and update methods.
+    // the save method is smart enough to figure out which it needs to do
+    // i.e. if the passed object already has an `id` property, update an
+    // existing record, if it does not, insert a new record
     public void save(Post post) {
-        post.setId(posts.size() + 1);
-        this.posts.add(post);
+        postDao.save(post);
     }
 
-    public List<Post> findAll() {
-        return posts;
+    // we'll need to define the return type as `Iterable` as that is
+    // what the CrudRepository defines. You can think of `Iterable` as
+    // an even more generic list, it is still a collection of items
+    public Iterable<Post> findAll() {
+        return postDao.findAll();
     }
 
     public Post findOne(long id) {
-        return posts.get((int)id - 1);
+        return postDao.findOne(id);
     }
 
-    public void update(Post post) {
-        posts.set((int)post.getId() - 1, post);
+    public void delete(long id) {
+        postDao.delete(id);
     }
 }
