@@ -53,7 +53,7 @@ public class AdController {
     @ResponseBody
     @GetMapping("/tests")
     public String test() {
-        User user = new User("zach", "codeup");
+        User user = new User("zach", "codeup", "example.@mail.com");
         // Setter injection
         //Ad ad = new Ad("Ad title", "Ad description");
         // Somebody might forget to call the setter, this is why it's called optional dependency
