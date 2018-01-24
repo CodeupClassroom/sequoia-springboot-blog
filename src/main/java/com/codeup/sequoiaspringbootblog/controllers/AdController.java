@@ -1,6 +1,7 @@
 package com.codeup.sequoiaspringbootblog.controllers;
 
 import com.codeup.sequoiaspringbootblog.models.Ad;
+import com.codeup.sequoiaspringbootblog.models.User;
 import com.codeup.sequoiaspringbootblog.services.AdService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class AdController {
 
     @GetMapping("/ads")
     public String showAllAds(Model viewAndModel) {
-        List<Ad> ads = adsService.findAll();
+        Iterable<Ad> ads = adsService.findAll();
 
         viewAndModel.addAttribute("ads", ads);
 
@@ -48,4 +49,19 @@ public class AdController {
         adsService.save(ad);
         return ad.getTitle() + " " + ad.getDescription();
     }
+
+    @ResponseBody
+    @GetMapping("/tests")
+    public String test() {
+        User user = new User("zach", "codeup");
+        // Setter injection
+        //Ad ad = new Ad("Ad title", "Ad description");
+        // Somebody might forget to call the setter, this is why it's called optional dependency
+        //ad.setOwner(user);
+        // Constructor injection is required, because there is no way to create a Post without a User
+        Ad ad = new Ad("Ad title", "Ad description", user);
+        adsService.save(ad);
+        return "Saved!";
+    }
+
 }
