@@ -15,7 +15,7 @@ public class Ad {
     @Column(nullable = true)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User owner;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ad")
@@ -69,5 +69,9 @@ public class Ad {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 }

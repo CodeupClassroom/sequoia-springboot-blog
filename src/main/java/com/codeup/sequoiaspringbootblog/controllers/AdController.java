@@ -1,8 +1,10 @@
 package com.codeup.sequoiaspringbootblog.controllers;
 
+import com.codeup.sequoiaspringbootblog.daos.UsersRepository;
 import com.codeup.sequoiaspringbootblog.models.Ad;
 import com.codeup.sequoiaspringbootblog.models.User;
 import com.codeup.sequoiaspringbootblog.services.AdService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.List;
 public class AdController {
     // Auto-wiring
     private AdService adsService;
+    private UsersRepository usersRepository;
 
-    public AdController(AdService service) {
+    public AdController(AdService service, UsersRepository usersRepository) {
         this.adsService = service;
+        this.usersRepository = usersRepository;
     }
 
     @GetMapping("/ads")
@@ -44,10 +48,18 @@ public class AdController {
     }
 
     @PostMapping("/ads/create")
-    @ResponseBody
     public String saveAd(@ModelAttribute Ad ad) {
+
+        // In order for this line to always return a User you need to add this URL path
+        // to the SecurityConfiguration class
+        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // If you ever find the "Detached entity error" the solution is to go for the user to
+        // the database using the repository -> usersRepository.findOne(owner.getId())
+        // instead of using the object directly
+        ad.setOwner(usersRepository.findOne(owner.getId()));
         adsService.save(ad);
-        return ad.getTitle() + " " + ad.getDescription();
+        return "redirect:/ads";
     }
 
     @ResponseBody

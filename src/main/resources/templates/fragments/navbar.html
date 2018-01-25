@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 <head></head>
 <body>
 
 <nav id="my-nav" class="navbar navbar-default" th:fragment="mainNavbar">
     <ul class="nav navbar-nav">
         <li><a href="/">Index</a></li>
-        <li>
+        <li sec:authorize="!isAuthenticated()">
             <a href="/login">Login</a>
         </li>
-        <li>
+        <li sec:authorize="isAnonymous()">
             <a href="/register">Register</a>
         </li>
         <li>
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
             </form>
+        </li>
+        <li sec:authorize="isAuthenticated()" th:text="${#authentication.principal.username}">
+
         </li>
     </ul>
 </nav>

@@ -17,16 +17,26 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public User() {
-    }
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    //private List<Post> posts;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "owner")
+    private List<Ad> ads;
 
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User() {
+    }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     public long getId() {
@@ -61,11 +71,19 @@ public class User {
         this.email = email;
     }
 
-    public List<Post> getPosts() {
+    /*public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    pu*//*blic void setPosts(List<Post> posts) {
         this.posts = posts;
+    }*/
+
+    public List<Ad> getAds() {
+        return ads;
+    }
+
+    public void setAds(List<Ad> ads) {
+        this.ads = ads;
     }
 }
