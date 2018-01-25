@@ -1,6 +1,8 @@
 package com.codeup.sequoiaspringbootblog;
 
+import com.codeup.sequoiaspringbootblog.daos.UsersRepository;
 import com.codeup.sequoiaspringbootblog.models.Post;
+import com.codeup.sequoiaspringbootblog.models.User;
 import com.codeup.sequoiaspringbootblog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +32,12 @@ import java.util.List;
 public class PostsController {
     // 1. Create an instance variable with your dependency
     private final PostService postService;
+    private final UsersRepository usersRepository;
 
     // 2. Inject the dependency through the constructor and assign it to your instance variable
-    public PostsController(PostService postService) {
+    public PostsController(PostService postService, UsersRepository usersRepository) {
         this.postService = postService; // This the first time we assign something to postService
+        this.usersRepository = usersRepository;
     }
 
     @RequestMapping("/posts")
@@ -68,6 +72,8 @@ public class PostsController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
+        User user = usersRepository.findOne(2L);
+        post.setUser(user);
         postService.save(post);
         return "redirect:/posts";
     }
