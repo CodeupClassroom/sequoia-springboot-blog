@@ -51,7 +51,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                     "/posts/create", // only authenticated users can create ads
-                    "/posts/{id}/edit" // only authenticated users can edit ads
+                    "/posts/{id}/edit", // only authenticated users can edit ads
+                    // We're adding this 2 lines in order to get the User from the security
+                    // context in the AdController, otherwise `getPrincipal()` might return
+                    // a string instead of a User
+                    "/ads/new",
+                    "/ads/create"
                 )
                 .authenticated()
         ;
