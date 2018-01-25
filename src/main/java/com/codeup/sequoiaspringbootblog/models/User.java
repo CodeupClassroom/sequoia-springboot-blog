@@ -17,9 +17,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public User() {
-    }
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
@@ -27,6 +24,16 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User() {
+    }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     public long getId() {
