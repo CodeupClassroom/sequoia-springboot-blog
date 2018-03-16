@@ -57,7 +57,7 @@ public class AdController {
         // If you ever find the "Detached entity error" the solution is to go for the user to
         // the database using the repository -> usersRepository.findOne(owner.getId())
         // instead of using the object directly
-        ad.setOwner(usersRepository.findOne(owner.getId()));
+        ad.setOwner(usersRepository.getOne(owner.getId()));
         adsService.save(ad);
         return "redirect:/ads";
     }

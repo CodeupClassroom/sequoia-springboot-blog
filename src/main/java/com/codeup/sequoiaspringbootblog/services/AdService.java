@@ -21,6 +21,6 @@ public class AdService {
     }
 
     public Ad findOne(long id) {
-        return dao.findOne(id);
+        return dao.getOne(id);
     }
 }

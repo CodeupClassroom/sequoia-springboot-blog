@@ -28,7 +28,7 @@ public class PostService {
     }
 
     public Post findOne(long id) {
-        return postDao.findOne(id);
+        return postDao.getOne(id);
     }
 
     public void delete(long id) {
