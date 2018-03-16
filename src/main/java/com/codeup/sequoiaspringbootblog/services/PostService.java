@@ -32,6 +32,6 @@ public class PostService {
     }
 
     public void delete(long id) {
-        postDao.delete(id);
+        postDao.deleteById(id);
     }
 }
