@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "ads")
 public class Ad {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)

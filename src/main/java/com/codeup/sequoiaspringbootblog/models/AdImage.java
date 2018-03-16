@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="ad_images")
 public class AdImage {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)

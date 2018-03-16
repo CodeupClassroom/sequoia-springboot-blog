@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 public class User {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(unique = true, nullable = false)
